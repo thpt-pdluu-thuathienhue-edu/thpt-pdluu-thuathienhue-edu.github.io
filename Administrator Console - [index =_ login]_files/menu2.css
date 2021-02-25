@@ -1,0 +1,94 @@
+/* common styling */
+.menu2{background: #F0F0F0;width:99.9%; height: 28px; border: 1px solid #CDCDCD;}
+#menu{float:left;position:relative; z-index: 100; text-align: left;}
+#menu, #menu ul, #menu li { margin: 0; padding: 0; border: 0 none; }
+#menu li    { float:left;  position:relative; list-style: none; display: inline;}
+#menu li a  { display:block; white-space: nowrap;  }
+#menu li li { /*width: 100%;*/ clear: both;  /*FF 1.0.7 needs this */  }
+#menu li ul { visibility: hidden; position:absolute; }
+#menu li li ul {  top: 0; left: 0; }
+#menu li.hover ul               {  visibility: visible; }
+#menu li.hover ul li ul 		  {  visibility: hidden;  }
+#menu li.hover li.hover ul      {  visibility: visible;  left: 100%; }
+/* ---- Menu layout -------------------------- */
+#menu li {
+
+	border-left: 1px solid #F0F0F0;
+	border-right: 1px solid #d8d8d8;
+	background: #F0F0F0;
+}
+
+#menu li li { border: 0;}
+#menu ul    { border: 0.1em solid #ccc; background: #f6f6f6 url(bg-menu.gif) repeat-y left;}
+#menu ul li.node { background: transparent url(j_arrow.png) no-repeat right 50%; }
+#menu ul li.separator { background: #DDE1E6 url(bg-menu.gif);  height: 1px;  }
+#menu a, #menu div {
+
+	background-position: left 50%;
+    background-repeat: no-repeat;
+    color: #333333;
+    cursor: pointer;
+    font-family: Verdana,Geneva,sans-serif;
+    font-size: 11px;
+    font-weight: lighter;
+    line-height: 1.6em;
+    margin: 0 1px;
+    padding: 6px;
+    text-decoration: none;
+    vertical-align: middle;
+
+}
+#menu li.disabled a { color: gray; }
+#menu ul a {
+
+	font-size: 11px;
+
+	font-weight: normal;
+
+	padding-left: 25px;
+
+	padding-right: 20px;
+
+	line-height: 1.2em;
+
+}
+
+/* 1 level - hover */
+
+#menu li.hover a, #menu li.selected a {  background-color: #F3FFE8;border-left: 1px solid #6D9D2E;  border-right:1px solid #6D9D2E; margin: 0; }
+
+/* 2 level - normal */
+
+#menu li.hover li a { background-color: transparent; border: 0 none;   margin: 2px;  }
+
+/* 2 level - hover */
+
+#menu li.hover li.hover a { background-color: #E7EDDF; border: 1px solid #6D9D2E;  margin: 1px;   }
+
+/* 3 level - normal */
+
+#menu li.hover li.hover li a { background-color: transparent; border: 0 none;   margin: 2px;  }
+
+/* 3 level - hover */
+
+#menu li.hover li.hover li a:hover { background-color: #E7EDDF; border: 1px solid #6D9D2E;  margin: 1px;  }
+
+
+
+/* submenu styling */
+
+
+.botmenu{ padding-top:10px; width:100%; clear:both}
+
+div.submenu{clear:both; margin-top:10px; margin-left:10px; margin-right:10px ; font-weight:lighter;font-family:Verdana, Geneva, sans-serif;float:left;width: 98.3%;border: 1px solid #CDCDCD; background:#FFFFFF; margin-bottom:10px; }
+div.submenu div{height:22px;-moz-border-radius: 5px;-moz-border-radius: 5px; padding-left:5px}
+div.submenu div a{float:left; display:block;background: #fff; padding:3px 8px 3px 8px; color:#666666; border-right: 1px solid #D8D8D8}
+div.submenu div a.selected{float:left; display:block;background: #fff; color:#000; font-weight:600}
+#Tabs a:hover{color:#000}
+#Tabs a.Current{color: #000;font-weight: 600;}
+.swapinformation_info
+{
+	background: none repeat scroll 0 0 #FFFFFF;
+    border-top: 1px solid #666666;
+    height: 30px;
+}

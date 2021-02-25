@@ -1,0 +1,102 @@
+.center {
+    min-height: 500px;
+    padding: 0 10px 10px;
+    width: 495px;
+	 margin: 0 auto;
+	 height:auto;
+}
+
+.tit_header {
+    color: #000033;
+}
+.tit_header {
+    border-bottom: 1px dotted #CCCCCC;
+    font-size: 22px;
+    font-weight: normal;
+    height: 27px;
+    margin-bottom: 10px;
+    padding-top: 10px;
+}
+.in_center_top img {
+    float: left;
+    margin-right: 10px;
+}
+.img_big {
+    border: 1px solid #CCCCCC;
+    float: left;
+    margin-top: 10px;
+    max-height: 240px;
+    width: 255px;
+}
+.noidungtin {
+    line-height: 20px;
+    margin-bottom: 10px;
+    text-align: justify;
+    width: 495px;
+}
+.in_center_top .titcontent {
+    color: #000033;
+}
+.in_center_top .titcontent {
+    font-size: 20px;
+    line-height: 25px;
+    margin-bottom: 10px;
+}
+.day {
+    color: #666666;
+    font-size: 11px;
+    font-style: italic;
+    width: 494px;
+}
+.fl {
+    float: left;
+}
+.info {
+    float: left;
+    padding-top: 15px;
+    width: 100%;
+	padding-bottom:5px;
+}
+.in_center_top .titcontent_noimg {
+    float: left;
+    font-size: 20px;
+    line-height: 25px;
+    margin-bottom: 5px;
+    	color:#666;
+}
+.in_center_top_content .titcontent_noimg {
+    float: left;
+    font-size: 20px;
+    line-height: 25px;
+    margin-bottom: 10px;
+    width: 494px;
+	color:#666;
+}
+.onecontent {
+    background-color: #F1F1F1;
+    font-size: 18px;
+    font-weight: bold;
+    height: 37px;
+    line-height: 37px;
+    margin: 12px 0;
+    padding-left: 12px;
+    vertical-align: middle;
+}
+.info_week {
+    float: left;
+    font-size: 12px;
+    margin-left: 14px;
+    width: 480px;
+}
+ol, ul {
+    list-style: none outside none;
+}
+.info1 li {
+    height: 20px;
+    list-style: disc outside url("images/ul_style.png");
+    margin-top: 10px;
+}
+.center .wbantinmoi {
+    float: left;
+    margin-top: 10px;
+}

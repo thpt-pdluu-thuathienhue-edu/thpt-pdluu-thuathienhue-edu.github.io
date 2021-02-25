@@ -1,0 +1,23 @@
+#calendarDiv{position:absolute;width:205px;border:1px solid #1979BA;padding:1px;background-color:#fff;font-family:arial;font-size:10px;padding-bottom:20px;visibility:hidden;}
+#calendarDiv span,#calendarDiv img{float:left;color:#fff;}
+#calendarDiv .selectBox,#calendarDiv .selectBoxOver{line-height:12px;padding:1px;cursor:pointer;padding-left:2px;}
+#calendarDiv .selectBoxTime,#calendarDiv .selectBoxTimeOver{line-height:12px;padding:1px;cursor:pointer;padding-left:2px;}
+#calendarDiv td{padding:3px;margin:0px;font-size:10px;color:#219CCF;}
+#calendarDiv .selectBox{border:1px solid #f2f2f2;color:#fff;position:relative;}
+#calendarDiv .selectBoxOver{border:1px solid #fff;background-color:#219CCF;color:#fff;position:relative;}
+#calendarDiv .selectBox option{color:#fff;}
+#calendarDiv .selectBoxTime{border:1px solid #1979BA;color:#1979BA;position:relative;}
+#calendarDiv .selectBoxTimeOver{border:1px solid #216072;color:#216072;position:relative;}
+#calendarDiv .topBar{height:16px;padding:2px;background-color:#1979BA;}
+#calendarDiv .activeDay{color:#FF0000;}
+#calendarDiv .todaysDate{height:17px;line-height:17px;padding:2px;background-color:#f2f2f2;text-align:center;position:absolute;bottom:0px;width:201px;}
+#calendarDiv .todaysDate div{float:left;}
+#calendarDiv .timeBar{height:17px;line-height:17px;background-color:#f2f2f2;width:72px;color:#fff;position:absolute;right:0px;}
+#calendarDiv .timeBar div{float:left;margin-right:1px;}
+#calendarDiv .monthYearPicker{background-color:#f2f2f2;border:1px solid #AAAAAA;position:absolute;color:#666666;left:0px;top:15px;z-index:1000;display:none;}
+#calendarDiv #monthSelect{width:70px;color:#fff;}
+#calendarDiv .monthYearPicker div{float:none;clear:both;padding:1px;margin:1px;cursor:pointer;}
+#calendarDiv .monthYearActive{background-color:#1979BA;color:#fff;}
+#calendarDiv td{text-align:right;cursor:pointer;}
+#calendarDiv .topBar img{cursor:pointer;}
+#calendarDiv .topBar div{float:left;margin-right:1px;}

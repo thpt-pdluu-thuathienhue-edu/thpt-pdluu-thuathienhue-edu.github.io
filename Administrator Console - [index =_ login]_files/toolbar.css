@@ -1,0 +1,104 @@
+div.toolbar{clear:both;padding:10px 10px 0px 10px;}
+div.toolbar div.bor{border: 1px solid #CDCDCD; background:#FFFFFF; height:60px;-moz-border-radius: 5px;-moz-border-radius: 5px; padding-left:5px}
+div.toolbar div.icon{float:left; margin-top: 17px; margin-left:20px; width:30px; height:30px}
+div.toolbar div.t{float:left; font-size: 18px; margin-top: 17px; margin-left: 20px;}
+div.toolbar div.buts{float:right; margin-top:7px; margin-right:10px}
+div.toolbar a.icon{float:right; margin-right:10px;cursor:pointer; display:block;border:1px solid #fff;padding-left:4px;padding-right:4px}
+div.toolbar a.icon:hover{}
+div.toolbar a.icon span{display:block; width:29px; height: 29px;}
+div.toolbar a.icon span.text{width:auto;height:auto; white-space: nowrap;}
+div.toolbar .icon_new{background: url(../images/toolbar/icon-32-new.png);}
+div.toolbar .icon_new_content{background: url(../images/toolbar/icon-content.png);}
+div.toolbar .icon_edit{background: url(../images/toolbar/icon-32-edit.png);}
+div.toolbar .icon_comment{background: url(../images/toolbar/icon-32-comment.png);}
+div.toolbar .icon_del{background: url(../images/toolbar/icon-32-delete.png);}
+div.toolbar .icon_save{background: url(../images/toolbar/icon-32-save.png);}
+div.toolbar .icon_apply{background: url(../images/toolbar/icon-32-apply.png);}
+div.toolbar .icon_cancel{background: url(../images/toolbar/icon-32-cancel.png);}
+div.toolbar .icon_adduser{background: url(../images/toolbar/icon-32-adduser.png);}
+div.toolbar .icon_back{background: url(../images/toolbar/icon-32-back.png);}
+div.toolbar .icon_background{background: url(../images/toolbar/icon-32-default.png)}
+div.toolbar .icon_send{background: url(../images/toolbar/send.png)}
+div.toolbar .icon_export{background: url(../images/toolbar/icon32-export.gif)}
+
+div.toolbar .icon_type_document{background: url(../images/toolbar/icon-type.png);}
+
+div.toolbar .icon_sendemail{background: url("../images/toolbar/sendemail.png") no-repeat scroll 0 0 transparent; }
+div.toolbar .icon_getemail{background: url("../images/toolbar/getmail.png") no-repeat scroll 0 0 transparent; }
+div.toolbar .icon_global{background: url("../images/toolbar/global.png") no-repeat scroll 0 0 transparent; }
+.swap
+{
+	width:55px;
+	float:right;
+}
+.swap a
+{
+	width:30px;
+	text-align:center;
+}
+.swap p
+{
+	width:60px;
+	float:right;
+	color:#003366;
+}
+
+
+.email_t
+{
+	width:49px;
+	float:right;
+	padding-left:10px;
+}
+.email_t a
+{
+	width:30px;
+	text-align:center;
+}
+.email_t p
+{
+	width:45px;
+	float:right;
+	color:#003366;
+}
+
+.user_t
+{
+	width:140px;
+	float:right;
+	padding-right:10px;
+}
+.user_t a
+{
+	width:30px;
+	text-align:center;
+}
+.user_t p
+{
+	width:100%;
+	float:right;
+	color:#003366;
+}
+
+.logout_t
+{
+	width:49px;
+	float:right;
+	padding-left:10px;
+}
+.logout_t a
+{
+	width:30px;
+	text-align:center;
+}
+.logout_t p
+{
+	width:48px;
+	float:right;
+	color:#003366;
+}
+
+
+div.toolbar .icon_sendnotice{background: url("../images/toolbar/sendnotice.png") no-repeat scroll 0 0 transparent;  }
+div.toolbar .icon_senddocument{background:url("../images/toolbar/senddocument.png")no-repeat scroll 0 0 transparent;  }
+div.toolbar .icon_share{background:url("../images/toolbar/share.png")no-repeat scroll 0 0 transparent;  }

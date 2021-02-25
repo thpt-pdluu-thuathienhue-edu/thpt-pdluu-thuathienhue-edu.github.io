@@ -1,0 +1,631 @@
+// JavaScript Document
+
+function ImportData(obj,obj_imp)
+{
+	name_file=document.getElementById(obj).value;
+	
+	
+   if(name_file=="")
+     alert("Vui lòng chọn file để nạp dữ liệu");
+   else
+   {
+	var filetype = name_file.split(".");
+	var ext_file=filetype[ filetype.length-1 ];
+    if( ext_file!="xls")
+	{
+	alert("Chỉ hổ trợ nạp dữ liệu của các file Excel 2003 ");		
+	}
+	else
+	{
+		//Tiến hành ajax nạp filefrmeditchat_ifr
+		var iframe = document.getElementById(obj_imp);
+		var frameDoc = iframe.contentDocument || iframe.contentWindow.document;
+	    var el = frameDoc.getElementById("tinymce");
+		el.innerHTML="Đang nạp file...";
+		//alert(obj_imp);
+		if (window.XMLHttpRequest)
+		  {// code for IE7+, Firefox, Chrome, Opera, Safari
+		  xmlhttp_imp=new XMLHttpRequest();
+		  }
+		else
+		  {// code for IE6, IE5
+		  xmlhttp_imp=new ActiveXObject("Microsoft.XMLHTTP");
+		  }
+		xmlhttp_imp.onreadystatechange=function()
+		  {
+		  if (xmlhttp_imp.readyState==4 && xmlhttp_imp.status==200)
+			{
+				//alert (xmlhttp_imp.responseText);
+				
+			
+			el.innerHTML=xmlhttp_imp.responseText;
+			}
+		  }
+		
+		xmlhttp_imp.open("GET","ajax_ImportData.php?file="+name_file,true);
+		xmlhttp_imp.send();
+		
+		
+	}
+   }
+}
+
+function ImportDataByFileName(fname,obj_imp)
+{
+	name_file=fname;
+	
+	
+   if(name_file=="")
+     alert("Vui lòng chọn file để nạp dữ liệu");
+   else
+   {
+	var filetype = name_file.split(".");
+	var ext_file=filetype[ filetype.length-1 ];
+    if( ext_file!="xls" && ext_file!="doc" && ext_file!="htm")
+	{
+	alert("Chỉ hổ trợ nạp dữ liệu của các file Excel 2003 ");		
+	}
+	else
+	{
+		//Tiến hành ajax nạp file
+		var iframe = document.getElementById(obj_imp);
+		var frameDoc = iframe.contentDocument || iframe.contentWindow.document;
+	    var el = frameDoc.getElementById("tinymce");
+		el.innerHTML="Đang nạp file...";
+		//alert(obj_imp);
+		if (window.XMLHttpRequest)
+		  {// code for IE7+, Firefox, Chrome, Opera, Safari
+		  xmlhttp_imp=new XMLHttpRequest();
+		  }
+		else
+		  {// code for IE6, IE5
+		  xmlhttp_imp=new ActiveXObject("Microsoft.XMLHTTP");
+		  }
+		xmlhttp_imp.onreadystatechange=function()
+		  {
+		  if (xmlhttp_imp.readyState==4 && xmlhttp_imp.status==200)
+			{
+				//alert (xmlhttp_imp.responseText);
+				
+			
+			el.innerHTML=xmlhttp_imp.responseText;
+			}
+		  }
+		
+		xmlhttp_imp.open("GET","ajax_ImportData.php?file="+name_file+"&idf=1",true);
+		xmlhttp_imp.send();
+		
+		
+	}
+   }
+}
+
+
+function HLsetCookie(c_name,value,exdays)
+{
+var exdate=new Date();
+exdate.setDate(exdate.getDate() + exdays);
+var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
+document.cookie=c_name + "=" + c_value;
+}
+
+function HLgetCookie(c_name)
+{
+var c_value = document.cookie;
+var c_start = c_value.indexOf(" " + c_name + "=");
+if (c_start == -1)
+  {
+  c_start = c_value.indexOf(c_name + "=");
+  }
+if (c_start == -1)
+  {
+  c_value = null;
+  }
+else
+  {
+  c_start = c_value.indexOf("=", c_start) + 1;
+  var c_end = c_value.indexOf(";", c_start);
+  if (c_end == -1)
+  {
+c_end = c_value.length;
+}
+c_value = unescape(c_value.substring(c_start,c_end));
+}
+return c_value;
+}
+
+function WaitImportProcess()
+{
+   	if(HLgetCookie("WasImport")!="" && HLgetCookie("WasImport")!=null)
+	{
+		var fname=HLgetCookie("WasImport");
+		//alert(fname);
+		HLsetCookie("WasImport","",999)
+		document.getElementById('MsgAlert').style.display="none";
+		document.getElementById('frmHLPopup').style.display="none";
+		ImportDataByFileName(fname,"Description_ifr");
+		document.getElementById('isImport').value=0;
+		
+	}
+	
+}
+
+
+function HLsetInterval(_func,_time) {
+    setInterval(_func,_time);
+}
+
+
+function GetNewMsg(name_id_change)
+{
+	
+		//alert (1);
+		if (window.XMLHttpRequest)
+		  {// code for IE7+, Firefox, Chrome, Opera, Safari
+		  xmlhttp_newmsg_rmsg=new XMLHttpRequest();
+		  }
+		else
+		  {// code for IE6, IE5
+		  xmlhttp_newmsg_rmsg=new ActiveXObject("Microsoft.XMLHTTP");
+		  }
+		xmlhttp_newmsg_rmsg.onreadystatechange=function()
+		  {
+		  if (xmlhttp_newmsg_rmsg.readyState==4 && xmlhttp_newmsg_rmsg.status==200)
+			{
+		   
+			//alert (xmlhttp_newmsg_rmsg.responseText);	
+			var Arr= xmlhttp_newmsg_rmsg.responseText.split('(^v-)');
+			if(isNaN(Arr[0].substring(0,1)))
+			document.getElementById(name_id_change).innerHTML=Arr[0];
+			else
+			Arr[0]="0";
+			if(Arr[1]==undefined)
+			   Arr[1]="<h3>Không thể kết nối đến trung tâm</h3><p>Rất tiết, không thể kết nối được với trung tâm, vui lòng kiểm tra lại đường truyền Internet, hoặc báo cho quản trị web tại đơn vị của bạn được biết về lỗi này.</p>";
+			document.getElementById('list_msg').innerHTML=Arr[1];
+			
+			
+			}
+		  }
+		
+		xmlhttp_newmsg_rmsg.open("GET","hlclass.php?tp=getnewmsg",true);
+		xmlhttp_newmsg_rmsg.send();
+}
+
+function ReadRootMsg(id)
+{
+	
+		document.getElementById('desc_root_msg').innerHTML="<p align=center>Vui lòng đợi trong giây lát</p>";
+		if (window.XMLHttpRequest)
+		  {// code for IE7+, Firefox, Chrome, Opera, Safari
+		  xmlhttp_readmsg=new XMLHttpRequest();
+		  }
+		else
+		  {// code for IE6, IE5
+		  xmlhttp_readmsg=new ActiveXObject("Microsoft.XMLHTTP");
+		  }
+		xmlhttp_readmsg.onreadystatechange=function()
+		  {
+		  if (xmlhttp_readmsg.readyState==4 && xmlhttp_readmsg.status==200)
+			{
+			document.getElementById('desc_root_msg').innerHTML=xmlhttp_readmsg.responseText;
+			GetNewMsg('num_new_msg');
+			}
+		  }
+		
+		xmlhttp_readmsg.open("GET","hlclass.php?tp=readrootmsg&imsg="+id,true);
+		xmlhttp_readmsg.send();
+}
+
+
+function SendChat()
+{
+	
+	   //Tiến hành ajax nạp file
+		var iframe = document.getElementById('frmeditchat_ifr');
+		var frameDoc = iframe.contentDocument || iframe.contentWindow.document;
+	    var el = frameDoc.getElementById("tinymce");
+
+		
+		var content=tinyMCE.get('frmeditchat').getContent();
+	    content = encodeURIComponent(content);
+	 
+	    //var content=el.innerHTML;
+		var file_attach= document.getElementById('file_attach_err').value;
+		var titlechat  = document.getElementById('txtTitleChat').value;
+		
+		if(titlechat.length <2)
+		{
+		 alert('Nhập tiêu đề tóm tắc yêu cầu, thắc mắc'); return false;
+		}
+		if(content<10)
+		{
+		 alert('Nhập nội dung yêu cầu, thắc mắc'); return false;
+		}
+		//document.getElementById('desc_root_msg').innerHTML="<p align=center>Vui lòng đợi trong giây lát</p>";
+		if (window.XMLHttpRequest)
+		  {// code for IE7+, Firefox, Chrome, Opera, Safari
+		  xmlhttp_sendchat=new XMLHttpRequest();
+		  }
+		else
+		  {// code for IE6, IE5
+		  xmlhttp_sendchat=new ActiveXObject("Microsoft.XMLHTTP");
+		  }
+		xmlhttp_sendchat.onreadystatechange=function()
+		  {
+		  if (xmlhttp_sendchat.readyState==4 && xmlhttp_sendchat.status==200)
+			{
+			//document.getElementById("frmreturn").innerHTML=xmlhttp_sendchat.responseText;
+			var x =xmlhttp_sendchat.responseText;
+			//alert(x);
+			if(x==0)
+			alert('Rất tiết, hệ thống phát hiện có lỗi, không thể gửi tin đi được. Vui lòng thử lại');
+			else
+			{
+				
+			document.getElementById('modal_popup_messenger_send').style.display="none";
+			el.innerHTML="";
+			document.getElementById('file_attach_err').value="";
+			document.getElementById('txtTitleChat').value="";
+			alert('Yêu cầu của bạn đã gửi thành công');
+			}
+			//GetChat();
+			}
+		  }
+		
+		xmlhttp_sendchat.open("GET","hlclass.php?tp=sendchat&msg="+content+"&fa="+file_attach+"&tit="+titlechat,true);
+		xmlhttp_sendchat.send();
+}
+
+
+function GetChat()
+{
+	
+		//document.getElementById('desc_root_msg').innerHTML="<p align=center>Vui lòng đợi trong giây lát</p>";
+		if (window.XMLHttpRequest)
+		  {// code for IE7+, Firefox, Chrome, Opera, Safari
+		  xmlhttp_getchat=new XMLHttpRequest();
+		  }
+		else
+		  {// code for IE6, IE5
+		  xmlhttp_getchat=new ActiveXObject("Microsoft.XMLHTTP");
+		  }
+		xmlhttp_getchat.onreadystatechange=function()
+		  {
+		  if (xmlhttp_getchat.readyState==4 && xmlhttp_getchat.status==200)
+			{
+			//document.getElementById('frmchatlist').innerHTML=xmlhttp_getchat.responseText;
+			
+			var Arr= xmlhttp_getchat.responseText.split('[010189(^v-)241188]');
+			document.getElementById('inum_chat').innerHTML=Arr[0];
+			if(Arr[1]!="" && Arr[1]!="[010189(^v-)241188]") 
+			document.getElementById('frmchatlist').innerHTML=Arr[1];
+			
+			}
+		  }
+		
+		xmlhttp_getchat.open("GET","hlclass.php?tp=getchat",true);
+		xmlhttp_getchat.send();
+}
+
+var CMD="";
+var STEP=0;
+var TimeStart_SYN;
+var ISTATUS=0;
+var NAME_ID_CHANGE="";
+function GetNewIE(cmd,name_id_change)
+{       
+	    CMD=cmd;
+		//NAME_ID_CHANGE=name_id_change;
+		STEP=0;
+		TimeStart_SYN= new Date();
+		if (window.XMLHttpRequest)
+		  {// code for IE7+, Firefox, Chrome, Opera, Safari
+		  xmlhttp_newmsg_syn=new XMLHttpRequest();
+		  }
+		else
+		  {// code for IE6, IE5
+		  xmlhttp_newmsg_syn=new ActiveXObject("Microsoft.XMLHTTP");
+		  }
+		xmlhttp_newmsg_syn.onreadystatechange=function()
+		  {
+		  if (xmlhttp_newmsg_syn.readyState==4 && xmlhttp_newmsg_syn.status==200)
+			{
+		   
+			//alert (xmlhttp_newmsg_syn.responseText);
+			if(xmlhttp_newmsg_syn.responseText=="")
+			   xmlhttp_newmsg_syn.responseText=0;
+			var num= parseInt(xmlhttp_newmsg_syn.responseText);
+			if(isNaN(num))
+			
+			  num=0;
+			//document.getElementById(name_id_change).innerHTML=num;
+			if(num>0)
+			  {
+			   document.getElementById('modal_popup_messenger_syn').style.display='block';
+			   ISTATUS=1;
+			   //document.getElementById('bg_transparent').style.display='block';
+			   TotalPost=num;
+			   SynNewIE(cmd);
+			   
+			  }
+			 else
+			 {
+				//window.StopWhateverBelow();
+				return true;
+			 }
+			  
+			}
+		  }
+		
+		xmlhttp_newmsg_syn.open("GET","hlclass.php?cmd="+cmd,true);
+		xmlhttp_newmsg_syn.send();
+}
+var WasSyn=0;
+var TotalPost=0;
+function SynNewIE(cmd)
+{
+	    STEP=1;
+		TimeStart_SYN= new Date();
+		
+		document.getElementById('unit_processbar').innerHTML= WasSyn+" / "+TotalPost;
+		if (window.XMLHttpRequest)
+		  {// code for IE7+, Firefox, Chrome, Opera, Safari
+		  xmlhttp_newsym=new XMLHttpRequest();
+		  }
+		else
+		  {// code for IE6, IE5
+		  xmlhttp_newsym=new ActiveXObject("Microsoft.XMLHTTP");
+		  }
+		xmlhttp_newsym.onreadystatechange=function()
+		  {
+		  if (xmlhttp_newsym.readyState==4 && xmlhttp_newsym.status==200)
+			{
+			var num= parseInt(xmlhttp_newsym.responseText);
+			if(isNaN(num))
+			{
+			num=0;
+			SynNewIE_So(cmd);
+			return true;
+			}
+			
+			
+			WasSyn = WasSyn+num;
+			if(WasSyn>=TotalPost)
+			{ 
+			SynNewIE_So(cmd);
+			return true;
+			}
+			var percent;
+			if(WasSyn==0)
+			percent=0;
+			else
+			percent=Math.round(((WasSyn)*100)/TotalPost);
+			
+			
+			
+			document.getElementById("countPercent").innerHTML=percent+" %";
+			document.getElementById('copy_processbar').innerHTML="<span  style=width:"+percent+"%></span>";
+			
+				if(num>0)
+				  SynNewIE(cmd);
+				else if(num==0)
+				{
+				SynNewIE_So(cmd);
+				return true;
+				}
+				else
+				return true;
+		
+			}
+		  }
+		
+		xmlhttp_newsym.open("GET","hlclass.php?cmd="+cmd+"&tpsyn=syn",true);
+		xmlhttp_newsym.send();
+}
+function SynNewIE_So(cmd)
+{
+	    STEP=2;
+		TimeStart_SYN= new Date();
+		document.getElementById('unit_processbar').innerHTML= WasSyn+" / "+TotalPost;
+		if (window.XMLHttpRequest)
+		  {// code for IE7+, Firefox, Chrome, Opera, Safari
+		  xmlhttp_newsym_so=new XMLHttpRequest();
+		  }
+		else
+		  {// code for IE6, IE5
+		  xmlhttp_newsym_so=new ActiveXObject("Microsoft.XMLHTTP");
+		  }
+		xmlhttp_newsym_so.onreadystatechange=function()
+		  {
+		  if (xmlhttp_newsym_so.readyState==4 && xmlhttp_newsym_so.status==200)
+			{
+			var num= parseInt(xmlhttp_newsym_so.responseText);
+			if(isNaN(num))
+			{
+			num=0;
+			SynNewIE_Document(cmd);
+			return true;
+			}
+			
+			
+			WasSyn = WasSyn+num;
+			if(WasSyn>=TotalPost)
+			{ 
+			SynNewIE_Document(cmd);
+			return true;
+			}
+			var percent;
+			if(WasSyn==0)
+			percent=0;
+			else
+			percent=Math.round(((WasSyn)*100)/TotalPost);
+			
+			
+			
+			document.getElementById("countPercent").innerHTML=percent+" %";
+			document.getElementById('copy_processbar').innerHTML="<span  style=width:"+percent+"%></span>";
+			
+				if(num>0)
+				  SynNewIE_So(cmd);
+				else if(num==0)
+				{
+				SynNewIE_Document(cmd);
+			    return true;
+				}
+				else
+				return true;
+
+			}
+		  }
+		
+		xmlhttp_newsym_so.open("GET","hlclass.php?cmd="+cmd+"&tpsyn=syn_so",true);
+		xmlhttp_newsym_so.send();
+}
+
+var Reload=0;
+function SynNewIE_Document(cmd)
+{
+	    STEP=3;
+		TimeStart_SYN= new Date();
+		document.getElementById('unit_processbar').innerHTML=  WasSyn+" / "+TotalPost;
+		if (window.XMLHttpRequest)
+		  {// code for IE7+, Firefox, Chrome, Opera, Safari
+		  xmlhttp_newsym_doc=new XMLHttpRequest();
+		  }
+		else
+		  {// code for IE6, IE5
+		  xmlhttp_newsym_doc=new ActiveXObject("Microsoft.XMLHTTP");
+		  }
+		xmlhttp_newsym_doc.onreadystatechange=function()
+		  {
+		  if (xmlhttp_newsym_doc.readyState==4 && xmlhttp_newsym_doc.status==200)
+			{
+		   //document.getElementById("countPercent").innerHTML=xmlhttp_newsym.responseText;
+		    
+
+			var num= parseInt(xmlhttp_newsym_doc.responseText);
+			
+			if(isNaN(num))
+			{
+			//alert(xmlhttp_newsym_doc.responseText);
+			num=0;
+			ISTATUS=0;
+			SynNewIE(cmd);
+			return true;
+			}
+
+			WasSyn = WasSyn+num;
+			
+			
+			
+			if(WasSyn>=TotalPost)
+			{ 
+			document.getElementById('copy_processbar').innerHTML="<span  style=width:99%></span>";
+			document.getElementById('unit_processbar').innerHTML= TotalPost+"/"+TotalPost;
+			if(TotalPost>20)
+			{
+			document.getElementById("countPercent").innerHTML="100%<br><input type='button' class=modal_btnclose onclick=window.location.reload() value='Nhấn vào đây để hoàn tất' >";
+			}
+			else
+			{
+				window.location.reload();
+			}
+			ISTATUS=0;
+			return true;
+			}
+			var percent;
+			if(WasSyn==0)
+			percent=0;
+			else
+			percent=Math.round(((WasSyn)*100)/TotalPost);
+			
+			
+			
+			document.getElementById("countPercent").innerHTML=percent+" %";
+			document.getElementById('copy_processbar').innerHTML="<span  style=width:"+percent+"%></span>";
+			
+			if(num>0)
+			  SynNewIE_Document(cmd);
+			else if(num==0)
+			{
+			document.getElementById('copy_processbar').innerHTML="<span  style=width:99%></span>";
+			document.getElementById('unit_processbar').innerHTML= TotalPost+"/"+TotalPost;
+			
+			if(TotalPost>5)
+			{
+			document.getElementById("countPercent").innerHTML="100%<br><input type='button' class=modal_btnclose onclick=window.location.reload() value='Nhấn vào đây để hoàn tất' >";
+			}
+			else
+			{
+				window.location.reload();
+			}
+			ISTATUS=0;
+			return true;
+			}
+
+			}
+		  }
+		
+		xmlhttp_newsym_doc.open("GET","hlclass.php?cmd="+cmd+"&tpsyn=syn_doc",true);
+		xmlhttp_newsym_doc.send();
+}
+function GetReConnect()
+{
+	if(Reload>30)
+	{
+		clearInterval(IDReConnect);
+		document.getElementById("countPercent").innerHTML="<br><input type='button' class=modal_btnclose onclick='window.location.reload()' value='Mất kết nối. Kết nối lại' >"
+		return true;
+	}
+	
+	if(ISTATUS==1)
+	{
+	var dNow= new Date();
+	var offset_catche = dNow.getTime() - TimeStart_SYN.getTime();
+	var totalsecond_catche =Math.round(offset_catche / 1000 ); 
+	
+	if(totalsecond_catche>30)
+	{
+    Reload++;
+    if(STEP==0)
+	GetNewIE(CMD,NAME_ID_CHANGE);
+	else if(STEP==1)
+	SynNewIE(CMD);
+	else if(STEP==2)
+	SynNewIE_So(CMD);
+	else if(STEP==3)
+	SynNewIE_Document(CMD)
+	
+	}
+	document.getElementById('time_process').innerHTML=  "["+Reload+" : "+totalsecond_catche+"]";
+	}
+}
+
+
+function ReadIE(id,token)
+{
+	document.getElementById('modal_popup_read_ie').style.display= "block";
+	document.getElementById('bg_transparent').style.display= "block";
+	document.getElementById('content_ie').innerHTML= "Đang tải nội dung .....";
+		if (window.XMLHttpRequest)
+		  {// code for IE7+, Firefox, Chrome, Opera, Safari
+		  xmlhttp_read_ie=new XMLHttpRequest();
+		  }
+		else
+		  {// code for IE6, IE5
+		  xmlhttp_read_ie=new ActiveXObject("Microsoft.XMLHTTP");
+		  }
+		xmlhttp_read_ie.onreadystatechange=function()
+		  {
+		  if (xmlhttp_read_ie.readyState==4 && xmlhttp_read_ie.status==200)
+			{
+			
+			document.getElementById('content_ie').innerHTML= xmlhttp_read_ie.responseText;
+			return true;
+			}
+		  }
+		
+		xmlhttp_read_ie.open("GET","ajax_read_ie.php?id="+id+"&token="+token,true);
+		xmlhttp_read_ie.send();
+}
+var IDReConnect = setInterval(function(){GetReConnect()},1000);
